@@ -22,10 +22,65 @@ or add
 to the require section of your `composer.json` file.
 
 
+Migrations
+----------
+
+To apply module migrations run command
+
+```
+./yii migrate --migrationPath=@snapget/news/migrations
+```
+
+Configure application
+---------------------
+
+Let's start with defining module in `@common/config/main.php`:
+
+```php
+......
+    'modules' => [
+        'treemanager' =>  [
+            'class' => '\kartik\tree\Module',
+            // other module settings, refer detailed documentation
+        ],
+        'news' => [
+            'class' => 'snapget\news\Module',
+        ],
+    ],
+......
+```
+
+> Note: Module requires `\kartik\tree\Module`, so your configuration should looks like above.
+
+
+Restrict access to admin controller from frontend. Open `@frontend/config/main.php` and add following:
+
+```php
+'modules' => [
+    'news' => [
+        // following line will restrict access to `admin-news-category` and `admin-news` controllers from frontend application
+        'as frontend' => 'snapget\news\filters\FrontendFilter',
+    ],
+],
+```
+
+Restrict access to `news` controller from backend. 
+Open `@backend/config/main.php` and add the following:
+
+```php
+'modules' => [
+    'news' => [
+        // following line will restrict access to `news` controller from frontend application
+        'as backend' => 'snapget\news\filters\BackendFilter',
+    ],
+],
+```
+
 Usage
 -----
 
-Once the extension is installed, simply use it in your code by  :
+Go to `/admin-news-category` route to manage news categories.
 
-```php
-<?= \snapget\news\AutoloadExample::widget(); ?>```
+Go to `/admin-news` route to manage news.
+
+Go to `/news/news` route to view frontend news view.

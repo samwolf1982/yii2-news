@@ -4,7 +4,7 @@ namespace snapget\news\controllers;
 
 use snapget\news\models\News;
 use snapget\news\models\NewsCategory;
-use snapget\news\models\NewsSearch;
+use snapget\news\models\AdminNewsSearch;
 use vova07\imperavi\actions\GetImagesAction;
 use vova07\imperavi\actions\UploadFileAction;
 use Yii;
@@ -62,10 +62,11 @@ class AdminNewsController extends Controller
     /**
      * Lists all News models.
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionIndex()
     {
-        $searchModel = new NewsSearch();
+        $searchModel = new AdminNewsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

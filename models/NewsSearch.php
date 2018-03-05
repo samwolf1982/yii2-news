@@ -5,6 +5,7 @@ namespace snapget\news\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 
@@ -47,11 +48,11 @@ class NewsSearch extends News
         $query = News::find()->orderBy(['created_at' => SORT_DESC])->joinWith(['newsCategories']);
 
         // add conditions that should always apply here
-        NewsCategory::updateAll(['selected' => 0]);
+        NewsCategory::updateAll(['selected' => NewsCategory::STATUS_SELECTED_NOT_ACTIVE]);
 
         if ($categoryId) {
             $newsCategory = NewsCategory::findOne($categoryId);
-            $newsCategory->updateAttributes(['selected' => 1]);
+            $newsCategory->updateAttributes(['selected' => NewsCategory::STATUS_SELECTED_ACTIVE]);
             if (!$newsCategory) {
                 throw new NotFoundHttpException(Yii::t('app', 'Category Not Found'));
             }
@@ -61,6 +62,10 @@ class NewsSearch extends News
             $query->joinWith(['newsCategoryNews'])
                 ->andWhere(['[[news_category_news]].[[news_category_id]]' => $childrenIds]);
         }
+
+        $query->andWhere(['active' => News::STATUS_ACTIVE]);
+
+        $this->filterQuery($query);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -88,5 +93,14 @@ class NewsSearch extends News
             ->andFilterWhere(['like', 'image', $this->image]);
 
         return $dataProvider;
+    }
+
+    /**
+     * Addes additional filters to `$query`, uses in children classes.
+     *
+     * @param ActiveQuery $query
+     */
+    protected function filterQuery($query)
+    {
     }
 }

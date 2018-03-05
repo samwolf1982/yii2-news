@@ -89,7 +89,7 @@ class Module extends \yii\base\Module
 
         if (!Yii::$app->hasModule($this->treemanagerModuleId)) {
             throw new InvalidConfigException(
-                Yii::t('app', 'Treemanager module is require (http://demos.krajee.com/tree-manager)')
+                Yii::t('app', 'Treemanager module is require to configure (http://demos.krajee.com/tree-manager#setup-module)')
             );
         }
 

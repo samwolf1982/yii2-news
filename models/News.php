@@ -28,6 +28,9 @@ class News extends \yii\db\ActiveRecord
     const SCENARIO_CREATE = 'create';
     const SCENARIO_UPDATE = 'update';
 
+    const STATUS_ACTIVE = 1;
+    const STATUS_NOT_ACTIVE = 0;
+
     /**
      * @var string
      */

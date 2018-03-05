@@ -34,6 +34,9 @@ use yii\db\ActiveQuery;
  */
 class NewsCategory extends Tree
 {
+    const STATUS_SELECTED_ACTIVE = 1;
+    const STATUS_SELECTED_NOT_ACTIVE = 0;
+
     /**
      * @inheritdoc
      */
