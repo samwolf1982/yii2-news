@@ -29,6 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'short_description',
             'created_at:datetime',
             [
+                'attribute' => 'active',
+                'value' => function ($model) {
+                    return $model->active ? Yii::t('app', 'Active') : Yii::t('app', 'Not Active');
+                },
+                'filter' => ['Not Active', 'Active'],
+            ],
+            [
                 'attribute' => 'image',
                 'format' => 'raw',
                 'value' => function ($model) {

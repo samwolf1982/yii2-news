@@ -30,19 +30,19 @@ class Module extends \yii\base\Module
     /**
      * @var string
      */
-    public $baseImagePath = '@webroot/upload/news';
+    public $baseImagePath;
     /**
      * @var string
      */
-    public $baseImageUrl = '@web/upload/news';
+    public $baseImageUrl;
     /**
      * @var string
      */
-    public $baseDescriptionImagePath = '@webroot/upload/news/description';
+    public $baseDescriptionImagePath;
     /**
      * @var string
      */
-    public $baseDescriptionImageUrl = '@web/upload/news/description';
+    public $baseDescriptionImageUrl;
 
     /**
      * @var array default values to config `\kartik\tree\TreeView`.
@@ -99,12 +99,28 @@ class Module extends \yii\base\Module
             $this->treeFrontendManagerConfig
         );
 
-        $this->baseImagePath = Yii::getAlias($this->baseImagePath);
-        $this->baseImageUrl = Yii::getAlias($this->baseImageUrl);
-        $this->baseDescriptionImagePath = Yii::getAlias($this->baseDescriptionImagePath);
-        $this->baseDescriptionImageUrl = Yii::getAlias($this->baseDescriptionImageUrl);
+        $this->initPathesAndUrls();
 
         $view = Yii::$app->view;
         NewsAsset::register($view);
+    }
+
+    protected function initPathesAndUrls()
+    {
+        $this->baseImagePath = !$this->baseImagePath
+            ? Yii::getAlias('@frontend') . '/web/upload/news'
+            : $this->baseImagePath;
+
+        $this->baseImageUrl = !$this->baseImageUrl
+            ? '//' . dirname(dirname(Yii::$app->request->url)) . '/upload/news'
+            : $this->baseImageUrl;
+
+        $this->baseDescriptionImagePath = !$this->baseDescriptionImagePath
+            ? Yii::getAlias('@frontend') . '/web/upload/news/description'
+            : $this->baseDescriptionImagePath;
+
+        $this->baseDescriptionImageUrl = !$this->baseDescriptionImageUrl
+            ? '//' . dirname(dirname(Yii::$app->request->url)) . '/upload/news/description'
+            : $this->baseDescriptionImageUrl;
     }
 }

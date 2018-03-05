@@ -15,6 +15,6 @@ class AdminNewsSearch extends NewsSearch
 {
     protected function filterQuery($query)
     {
-        $query->orWhere([News::tableName() . '.active' => News::STATUS_ACTIVE]);
+        $query->orWhere([News::tableName() . '.active' => News::STATUS_NOT_ACTIVE]);
     }
 }
