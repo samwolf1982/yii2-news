@@ -60,10 +60,10 @@ class NewsSearch extends News
             $childrenIds = ArrayHelper::getColumn($children->asArray()->all(), 'id');
 
             $query->joinWith(['newsCategoryNews'])
-                ->andWhere(['[[news_category_news]].[[news_category_id]]' => $childrenIds]);
+                ->andWhere([News::tableName() . '.[[news_category_id]]' => $childrenIds]);
         }
 
-        $query->andWhere(['active' => News::STATUS_ACTIVE]);
+        $query->andWhere([News::tableName() . '.active' => News::STATUS_ACTIVE]);
 
         $this->filterQuery($query);
 
