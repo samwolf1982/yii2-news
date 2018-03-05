@@ -105,22 +105,23 @@ class Module extends \yii\base\Module
         NewsAsset::register($view);
     }
 
+    /**
+     * @throws InvalidConfigException
+     */
     protected function initPathesAndUrls()
     {
+        if (!$this->baseImageUrl) {
+            throw new InvalidConfigException('Param "baseImageUrl" is required');
+        }
+
         $this->baseImagePath = !$this->baseImagePath
             ? Yii::getAlias('@frontend') . '/web/upload/news'
             : $this->baseImagePath;
 
-        $this->baseImageUrl = !$this->baseImageUrl
-            ? '//' . dirname(dirname(Yii::$app->request->url)) . '/upload/news'
-            : $this->baseImageUrl;
-
         $this->baseDescriptionImagePath = !$this->baseDescriptionImagePath
-            ? Yii::getAlias('@frontend') . '/web/upload/news/description'
+            ? $this->baseImagePath . '/description'
             : $this->baseDescriptionImagePath;
 
-        $this->baseDescriptionImageUrl = !$this->baseDescriptionImageUrl
-            ? '//' . dirname(dirname(Yii::$app->request->url)) . '/upload/news/description'
-            : $this->baseDescriptionImageUrl;
+        $this->baseDescriptionImageUrl = $this->baseImageUrl . '/description';
     }
 }

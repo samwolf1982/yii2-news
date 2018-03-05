@@ -58,6 +58,7 @@ class NewsSearch extends News
             }
             $children = $newsCategory->children();
             $childrenIds = ArrayHelper::getColumn($children->asArray()->all(), 'id');
+            $childrenIds[] = $categoryId;
 
             $query->joinWith(['newsCategoryNews'])
                 ->andWhere([NewsCategoryNews::tableName() . '.[[news_category_id]]' => $childrenIds]);

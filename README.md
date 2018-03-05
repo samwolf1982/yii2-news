@@ -60,6 +60,7 @@ Restrict access to admin controller from frontend. Open `@frontend/config/main.p
     'news' => [
         // following line will restrict access to `admin-news-category` and `admin-news` controllers from frontend application
         'as frontend' => 'snapget\news\filters\FrontendFilter',
+        'baseImageUrl' => 'http://news/upload/news',    // needs here absolute url
     ],
 ],
 ```
@@ -72,6 +73,7 @@ Open `@backend/config/main.php` and add the following:
     'news' => [
         // following line will restrict access to `news` controller from frontend application
         'as backend' => 'snapget\news\filters\BackendFilter',
+        'baseImageUrl' => 'http://news/upload/news',    // needs here absolute url
     ],
 ],
 ```
