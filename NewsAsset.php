@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\news;
+namespace snapget\news;
 
 
 use yii\web\AssetBundle;
