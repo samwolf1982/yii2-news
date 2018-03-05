@@ -1,0 +1,3 @@
+.kv-node-detail:hover, .kv-tree-root:hover {
+    cursor: pointer !important;
+}

@@ -1,0 +1,15 @@
+.blogShort {
+    border-bottom: 1px solid #ddd;
+}
+
+.img-item-container {
+    max-width: 150px;
+}
+
+.img-item-view {
+    max-width: 250px;
+}
+
+.description img {
+    width: 100%;
+}
