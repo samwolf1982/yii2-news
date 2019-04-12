@@ -1,3 +1,15 @@
+ пока не пофиксил ВАЖНО
+  после компосера нужно менять в 
+ 1)
+  vendor/snapget/yii2-news/models/News.php 
+ //use mongosoft\file\UploadBehavior;
+ use mohorev\file\UploadBehavior; 
+ 
+ 2)
+   C:/OSPanel/domains/atimur/loto/lotoproduction/vendor/snapget/yii2-news/models/NewsCategory.php
+   добавит поле
+   public $child_allowed=true;
+
 News module for Yii2
 ====================
 News module for Yii2 advanced template.
