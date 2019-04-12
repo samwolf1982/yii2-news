@@ -9,6 +9,8 @@
    C:/OSPanel/domains/atimur/loto/lotoproduction/vendor/snapget/yii2-news/models/NewsCategory.php
    добавит поле
    public $child_allowed=true;
+   
+   3)    "mohorev/yii2-upload-behavior": "*",
 
 News module for Yii2
 ====================
